@@ -1,0 +1,140 @@
+@use "sass:map";
+@import "style/pages/theme";
+
+.header-top {
+    background: #e5e5e5;
+}
+
+.header-top-right {
+    display: flex;
+    justify-content: end;
+    padding: 10px 0 13px;
+    ul {
+        display: flex;
+        column-gap: 10px;
+        list-style: none;
+
+        a {
+            font-size: 14px;
+            display: inline-block;
+            color: map.get($theme-colors, "normal-text");
+        }
+
+        li:last-child {
+            cursor: pointer;
+            margin-left: 10px;
+
+            span {
+                font-size: 14px;
+                margin-left: 2px;
+            }
+        }
+
+        
+    }
+}
+
+.header-top-left {
+    ul {
+        display: flex;
+        align-items: center;
+        list-style: none;
+        padding: 10px 0 13px;
+        column-gap: 20px;
+
+        li {
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            color: map.get($theme-colors, "normal-text");
+            column-gap: 2px;
+        }
+
+        li:first-child {
+            position: relative;
+            &:after {
+                position: absolute;
+                right: -10px;
+                top: 1px;
+                height: 20px;
+                width: 1px;
+                background: #000000fb;
+                opacity: 0.1;
+                content: "";
+
+            }
+        }
+    }
+}
+
+.header-logo {
+    padding: 20px 0;
+}
+
+.header-menu {
+    padding: 24px 0;
+
+    ul {
+        display: flex;
+        justify-content: space-between;
+
+        li {
+            list-style: none;
+
+            a {
+                text-decoration: none;
+                font-size: 14px;
+                color: map.get($theme-colors, "bold-text");
+                text-transform: uppercase;
+                font-weight: bold;
+                letter-spacing: 2px;
+                transition: all 0.3s;
+                padding: 5px 0;
+                display: block;
+            }
+        }
+
+        .active a {
+            color: map.get($theme-colors, "main");
+        }
+    }
+}
+
+.header-cart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px 0;
+
+    ul {
+        display: flex;
+        margin-right: 25px;
+
+        li {
+            position: relative;
+            list-style: none;
+            margin-left: 20px;
+
+            svg {
+                font-size: 25px;
+                color: map.get($theme-colors, "normal-text");
+            }
+
+            span {
+                color: white;
+                background: map.get($theme-colors, "main");
+                position: absolute;
+                height: 20px;
+                width: 20px;
+                border-radius: 50%;
+                display: inline-block;
+                line-height: 20px;
+                text-align: center;
+                font-size: 12px;
+                font-weight: 500;
+                left: 20px;
+                top: -1px;
+            }
+        }
+    }
+}
