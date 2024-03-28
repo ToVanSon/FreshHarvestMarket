@@ -9,11 +9,15 @@ import { FaUser } from "react-icons/fa";
 import { IoMail } from "react-icons/io5";
 import { formatter } from "utils/formatter";
 import { FaShoppingCart } from "react-icons/fa";
+import { FaList } from "react-icons/fa";
+import { FaPhoneAlt } from "react-icons/fa";
 import { ROUTERS } from "utils/router"
 
 
 const Header = () => {
-    const [menus, setMenu] = useState([
+
+    const [isShowCategories, setShowCategories] = useState(true);
+    const [menus] = useState([
         {
             name: "Trang chủ",
             path: ROUTERS.USER.HOME,
@@ -109,12 +113,21 @@ const Header = () => {
                     <div className="col-xl-6 col-lg-6">
                         <nav className="header-menu">
                             <ul>
-                                {
-                                    menus?.map((menu, menuKey) => (
-                                        <li key={menuKey} className={menuKey === 0 ? "active" : ""}>
-                                            <Link to={menu?.path}>{menu?.name}</Link>
-                                        </li>
-                                    ))
+                                {menus?.map((menu, menuKey) => (
+                                    <li key={menuKey} className={menuKey === 0 ? "active" : ""}>
+                                        <Link to={menu?.path}>{menu?.name}</Link>
+                                        {menu.child && (
+                                            <ul className="header-menu-dropdown">
+                                                {menu.child.map((childItem, childKey) => (
+                                                    <li key={`${menuKey}-${childKey})`}>
+                                                        <Link to={childItem.path}>{childItem.name}</Link>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        )}
+                                        
+                                    </li>
+                                ))
                                 }
                             </ul>
                         </nav>
@@ -134,6 +147,53 @@ const Header = () => {
                             </ul>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <div className="container">
+                <div className="row categories-container">
+                    <div className="col-xl-3 categories">
+                        <div className="categories-all" onClick={() => setShowCategories(!isShowCategories)}> 
+                             <FaList/>Danh sách sản phẩm</div>
+                        {isShowCategories && (
+                            <ul className={isShowCategories ? "" : "hidden"}>
+                                <li><Link to="#">Thịt tươi</Link></li>
+                                <li><Link to="#">Rau củ</Link></li>
+                                <li><Link to="#">Nước trái cây</Link></li>
+                                <li><Link to="#">Trái cây</Link></li>
+                                <li><Link to="#">Hải sản</Link></li>
+                            </ul>
+                        )}
+                        
+                    </div>
+                    <div className="col-lg-9 search-container">
+                        <div className="search">
+                            <div className="search-form">
+                                <form action="">
+                                    <input type="text" name="" value="" placeholder="Bạn đang tìm gì?"></input>
+                                    <button type="submit">Tìm kiếm</button>
+                                </form>
+                            </div>
+                            <div className="search-phone">
+                                <div className="search-phone-icon">
+                                    <FaPhoneAlt />
+                                </div>
+                                <div className="search-phone-text">
+                                    <p>0821.271.231</p>
+                                    <span>Hỗ trợ 24/7</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="banner-item">
+                            <div className="banner-item-text">
+                                <span>Trái cây tươi</span>
+                                <h2>Rau quả <br/> sạch 100%</h2>
+                                <p>Miễn phí giao hàng tận nơi</p>
+                                <Link to="" className="primary">Mua ngay</Link>
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
         </>
